@@ -28,7 +28,7 @@ export function add3(first: number, second: number, third: number): number {
  * mark added to the end.
  */
 export function shout(message: string): string {
-    return message.toUpperCase + "!";
+    return message.toUpperCase() + "!";
 }
 
 /**
@@ -36,7 +36,7 @@ export function shout(message: string): string {
  * mark. Do not use an `if` statement in solving this question.
  */
 export function isQuestion(message: string): boolean {
-    return message.lastIndexOf("!") !== -1;
+    return message.lastIndexOf("?") !== -1;
 }
 
 /**
@@ -46,7 +46,9 @@ export function isQuestion(message: string): boolean {
  */
 export function convertYesNo(word: string): boolean | null {
     let res = null;
+    // eslint-disable-next-line prettier/prettier
     word === "yes" || word === "YES" ? (res = true) : (res = null);
+    // eslint-disable-next-line prettier/prettier
     word === "no" || word === "NO" ? (res = false) : (res = null);
     return res;
 }
