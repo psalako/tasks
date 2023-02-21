@@ -49,8 +49,10 @@ export function isQuestion(message: string): boolean {
 export function convertYesNo(word: string): boolean | null {
     let res = null;
     // eslint-disable-next-line prettier/prettier
-    word === "yes" || word === "YES" ? (res = true) : (res = null);
+    word === "yes" ? (res = true) : (res = null);
+    word === "YES" ? (res = true) : (res = null);
     // eslint-disable-next-line prettier/prettier
-    word === "no" || word === "NO" ? (res = false) : (res = null);
+    word === "no" ? (res = false) : (res = null);
+    word === "NO" ? (res = false) : (res = null);
     return res;
 }
