@@ -36,7 +36,9 @@ export function shout(message: string): string {
  * mark. Do not use an `if` statement in solving this question.
  */
 export function isQuestion(message: string): boolean {
-    return message.lastIndexOf("?") !== -1;
+    // eslint-disable-next-line prefer-const
+    let res = message.lastIndexOf("?") === -1;
+    return !res;
 }
 
 /**
