@@ -37,8 +37,10 @@ export function shout(message: string): string {
  */
 export function isQuestion(message: string): boolean {
     // eslint-disable-next-line prefer-const
-    let res = message.lastIndexOf("?") === -1;
-    return !res;
+    let res = message.lastIndexOf("?") === message.length - 1;
+    // eslint-disable-next-line no-self-assign
+    message.length === 0 ? (res = false) : (res = res);
+    return res;
 }
 
 /**
@@ -48,11 +50,14 @@ export function isQuestion(message: string): boolean {
  */
 export function convertYesNo(word: string): boolean | null {
     let res = null;
-    // eslint-disable-next-line prettier/prettier
-    word === "yes" ? (res = true) : (res = null);
-    word === "YES" ? (res = true) : (res = null);
-    // eslint-disable-next-line prettier/prettier
-    word === "no" ? (res = false) : (res = null);
-    word === "NO" ? (res = false) : (res = null);
+    if (word === "yes") {
+        res = true;
+    } else if (word === "YES") {
+        res = true;
+    } else if (word === "NO") {
+        res = false;
+    } else if (word === "no") {
+        res = false;
+    }
     return res;
 }
