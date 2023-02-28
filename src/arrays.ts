@@ -5,7 +5,11 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    let newer: number[] = [];
+    numbers.length > 0
+        ? (newer = [numbers[0], numbers[numbers.length - 1]])
+        : (newer = []);
+    return newer;
 }
 
 /**
@@ -13,7 +17,8 @@ export function bookEndList(numbers: number[]): number[] {
  * number has been tripled (multiplied by 3).
  */
 export function tripleNumbers(numbers: number[]): number[] {
-    return numbers;
+    const triple = numbers.map((numbers: number): number => numbers * 3);
+    return triple;
 }
 
 /**
@@ -21,7 +26,10 @@ export function tripleNumbers(numbers: number[]): number[] {
  * the number cannot be parsed as an integer, convert it to 0 instead.
  */
 export function stringsToIntegers(numbers: string[]): number[] {
-    return [];
+    const ints = numbers.map((numberr: string): number =>
+        Number.isNaN(Number(numberr)) ? 0 : Number(numberr)
+    );
+    return ints;
 }
 
 /**
@@ -32,7 +40,15 @@ export function stringsToIntegers(numbers: string[]): number[] {
  */
 // Remember, you can write functions as lambdas too! They work exactly the same.
 export const removeDollars = (amounts: string[]): number[] => {
-    return [];
+    const place = amounts.map((numberr: string): string =>
+        numberr.substring(0, 1) === "$"
+            ? numberr.substring(1, numberr.length)
+            : (numberr = numberr)
+    );
+    const ints = place.map((numberr: string): number =>
+        Number.isNaN(Number(numberr)) ? 0 : Number(numberr)
+    );
+    return ints;
 };
 
 /**
@@ -41,7 +57,13 @@ export const removeDollars = (amounts: string[]): number[] => {
  * in question marks ("?").
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
-    return [];
+    const ups = messages.map((a: string): string =>
+        a.charAt(a.length - 1) === "!" ? a.toUpperCase() : (a = a)
+    );
+    const ques = ups.filter(
+        (b: string): boolean => b.charAt(b.length - 1) !== "?"
+    );
+    return ques;
 };
 
 /**
