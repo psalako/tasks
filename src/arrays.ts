@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-parens */
 /* eslint-disable prettier/prettier */
 /**
  * Consume an array of numbers, and return a new array containing
