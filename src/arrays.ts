@@ -96,10 +96,11 @@ export function allRGB(colors: string[]): boolean {
  */
 export function makeMath(addends: number[]): string {
     const add = addends.reduce((total: number, num: number) => total + num, 0);
-    const p = [add, ...addends];
-    const o = p.join("+");
-    o.replace("+", "=");
-    return o;
+    add.toString;
+    const p = [...addends];
+    let o = "";
+    p.length === 0 ? (o += "0") : (o = p.join("+"));
+    return add + "=" + o;
 }
 
 /**
