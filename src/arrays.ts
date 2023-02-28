@@ -71,7 +71,8 @@ export const shoutIfExclaiming = (messages: string[]): string[] => {
  * 4 letters long.
  */
 export function countShortWords(words: string[]): number {
-    return 0;
+    const count = words.filter((c: string): boolean => c.length < 4);
+    return count.length;
 }
 
 /**
@@ -80,7 +81,10 @@ export function countShortWords(words: string[]): number {
  * then return true.
  */
 export function allRGB(colors: string[]): boolean {
-    return false;
+    const like = colors.filter(
+        (d: string): boolean => d === "red" || d === "blue" || d === "green"
+    );
+    return like.length === colors.length;
 }
 
 /**
@@ -91,7 +95,11 @@ export function allRGB(colors: string[]): boolean {
  * And the array [] would become "0=0".
  */
 export function makeMath(addends: number[]): string {
-    return "";
+    const add = addends.reduce((total: number, num: number) => total + num, 0);
+    const p = [add, ...addends];
+    const o = p.join("+");
+    o.replace("+", "=");
+    return o;
 }
 
 /**
