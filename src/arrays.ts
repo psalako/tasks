@@ -43,7 +43,7 @@ export const removeDollars = (amounts: string[]): number[] => {
     const place = amounts.map((numberr: string): string =>
         numberr.substring(0, 1) === "$"
             ? numberr.substring(1, numberr.length)
-            : (numberr = numberr)
+            : (numberr += "")
     );
     const ints = place.map((numberr: string): number =>
         Number.isNaN(Number(numberr)) ? 0 : Number(numberr)
@@ -58,7 +58,7 @@ export const removeDollars = (amounts: string[]): number[] => {
  */
 export const shoutIfExclaiming = (messages: string[]): string[] => {
     const ups = messages.map((a: string): string =>
-        a.charAt(a.length - 1) === "!" ? a.toUpperCase() : (a = a)
+        a.charAt(a.length - 1) === "!" ? a.toUpperCase() : (a += "")
     );
     const ques = ups.filter(
         (b: string): boolean => b.charAt(b.length - 1) !== "?"
