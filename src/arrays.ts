@@ -116,7 +116,6 @@ export function makeMath(addends: number[]): string {
  */
 export function injectPositive(values: number[]): number[] {
     const ind = values.findIndex((p: number): boolean => p < 0);
-    console.log(ind);
     const a = [...values];
     ind >= 0 ? a.splice(ind, a.length - ind) : null;
     const add = a.reduce((total: number, num: number) => total + num, 0);
