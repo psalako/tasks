@@ -31,7 +31,11 @@ function App(): JSX.Element {
                 <Row>
                     <Col>
                         <div
-                            style={{ border: "3px solid pink", padding: "8px" }}
+                            style={{
+                                backgroundColor: "red",
+                                width: "240px",
+                                height: "50px"
+                            }}
                         >
                             Likes:
                         </div>
@@ -39,7 +43,11 @@ function App(): JSX.Element {
                     </Col>
                     <Col>
                         <div
-                            style={{ border: "3px solid blue", padding: "8px" }}
+                            style={{
+                                backgroundColor: "red",
+                                width: "240px",
+                                height: "50px"
+                            }}
                         >
                             Dislikes:
                         </div>
