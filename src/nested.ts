@@ -183,7 +183,13 @@ export function renameQuestionById(
     targetId: number,
     newName: string
 ): Question[] {
-    return [];
+    const a = questions.map(
+        (b: Question): Question => ({
+            ...b,
+            name: b.id === targetId ? newName : b.name
+        })
+    );
+    return a;
 }
 
 /***
@@ -198,7 +204,17 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    return [];
+    const a = questions.map(
+        (b: Question): Question => ({
+            ...b,
+            type: b.id === targetId ? newQuestionType : b.type,
+            options:
+                b.id === targetId && newQuestionType === "short_answer_question"
+                    ? []
+                    : b.options
+        })
+    );
+    return a;
 }
 
 /**
@@ -217,7 +233,23 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    return [];
+    const a = questions.filter((b: Question): boolean => b.id !== targetId);
+    console.log(a);
+    if (a.length > 0) {
+        targetOptionIndex !== -1 // eslint-disable-next-line no-extra-parens
+            ? (a[0].options[targetOptionIndex] = newOption)
+            : a[0].options.splice(a[0].options.length, 0, newOption);
+        const z = questions.map(
+            (x: Question): Question => ({
+                ...x,
+                options: x.id === targetId ? a[0].options : x.options
+            })
+        );
+        return z;
+    } else {
+        const k = questions.map((r: Question): Question => ({ ...r }));
+        return k;
+    }
 }
 
 /***
