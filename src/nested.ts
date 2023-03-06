@@ -1,6 +1,8 @@
 import Q from "q";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
+import { queries } from "@testing-library/dom";
+import { makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -119,7 +121,15 @@ export function toCSV(questions: Question[]): string {
  * making the `text` an empty string, and using false for both `submitted` and `correct`.
  */
 export function makeAnswers(questions: Question[]): Answer[] {
-    return [];
+    const a = questions.map(
+        (b: Question): Answer => ({
+            questionId: b.id,
+            text: "",
+            submitted: false,
+            correct: false
+        })
+    );
+    return a;
 }
 
 /***
@@ -127,7 +137,10 @@ export function makeAnswers(questions: Question[]): Answer[] {
  * each question is now published, regardless of its previous published status.
  */
 export function publishAll(questions: Question[]): Question[] {
-    return [];
+    const a = questions.map(
+        (b: Question): Question => ({ ...b, published: true })
+    );
+    return a;
 }
 
 /***
@@ -135,7 +148,13 @@ export function publishAll(questions: Question[]): Question[] {
  * are the same type. They can be any type, as long as they are all the SAME type.
  */
 export function sameType(questions: Question[]): boolean {
-    return false;
+    if (questions.length > 0) {
+        const res = questions[0].type;
+        const a = questions.filter((b: Question): boolean => b.type === res);
+        return a.length === questions.length;
+    } else {
+        return true;
+    }
 }
 
 /***
@@ -149,7 +168,9 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    return [];
+    const p = makeBlankQuestion(id, name, type);
+    const a = [...questions, p];
+    return a;
 }
 
 /***
