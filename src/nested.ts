@@ -1,3 +1,4 @@
+import Q from "q";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
 
@@ -6,7 +7,8 @@ import { Question, QuestionType } from "./interfaces/question";
  * that are `published`.
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
-    return [];
+    const a = questions.filter((b: Question): boolean => b.published);
+    return a;
 }
 
 /**
@@ -15,7 +17,11 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    return [];
+    const a = questions.filter(
+        (b: Question): boolean => b.body !== "" && b.expected !== ""
+    );
+
+    return a;
 }
 
 /***
@@ -26,7 +32,12 @@ export function findQuestion(
     questions: Question[],
     id: number
 ): Question | null {
-    return null;
+    const a = questions.find((b: Question): boolean => b.id === id);
+    if (a !== undefined) {
+        return a;
+    } else {
+        return null;
+    }
 }
 
 /**
