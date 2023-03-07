@@ -1,8 +1,6 @@
-import Q from "q";
 import { Answer } from "./interfaces/answer";
 import { Question, QuestionType } from "./interfaces/question";
-import { queries } from "@testing-library/dom";
-import { makeBlankQuestion } from "./objects";
+import { duplicateQuestion, makeBlankQuestion } from "./objects";
 
 /**
  * Consumes an array of questions and returns a new array with only the questions
@@ -20,7 +18,8 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
     const a = questions.filter(
-        (b: Question): boolean => b.body !== "" && b.expected !== ""
+        (b: Question): boolean =>
+            b.body !== "" || b.expected !== "" || b.options.length !== 0
     );
     return a;
 }
@@ -233,23 +232,22 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ): Question[] {
-    const a = questions.filter((b: Question): boolean => b.id !== targetId);
-    console.log(a);
-    if (a.length > 0) {
-        targetOptionIndex !== -1 // eslint-disable-next-line no-extra-parens
-            ? (a[0].options[targetOptionIndex] = newOption)
-            : a[0].options.splice(a[0].options.length, 0, newOption);
-        const z = questions.map(
-            (x: Question): Question => ({
-                ...x,
-                options: x.id === targetId ? a[0].options : x.options
-            })
-        );
-        return z;
-    } else {
-        const k = questions.map((r: Question): Question => ({ ...r }));
-        return k;
-    }
+    const a = questions.map((b: Question): Question => {
+        if (b.id === targetId) {
+            let news: string[];
+            if (-1 === targetOptionIndex) {
+                news = [...b.options, newOption];
+            } else {
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                news = [...b.options];
+                news.splice(targetOptionIndex, 1, newOption);
+            }
+            return { ...b, options: news };
+        } else {
+            return b;
+        }
+    });
+    return a;
 }
 
 /***
@@ -263,5 +261,9 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    return [];
+    const a = questions.findIndex((b: Question): boolean => b.id === targetId);
+    const c = duplicateQuestion(newId, questions[a]);
+    const d = [...questions];
+    d.splice(1 + a, 0, c);
+    return d;
 }
