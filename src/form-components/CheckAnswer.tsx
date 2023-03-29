@@ -27,3 +27,13 @@ export function CheckAnswer({
         </div>
     );
 }
+
+// export function CheckAnswer({
+//     expectedAnswer
+// }: {
+//     expectedAnswer: string;
+// }): JSX.Element {
+//     return (
+//         <div>
+//     );
+// }
